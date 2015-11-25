@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>Codellect Login</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <script src="{{ url_for('static', filename='lib/jquery-2.1.4.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/bootstrap.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/controller.js') }}"></script>
+    <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
+    <script>
+        $(function() {
+           $('#loginform').click(function(){
+               var postData = $(this).serializeArray()
+               $.ajax({
+                  type: 'POST',
+                   url: '/submit?state={{ STATE }}',
+                   contentType: 'multipart/form-data; charset=utf-8',
+                   data: postData,
+                   success: function (result) {
+                       console.log("In Here");
+                   }
+               });
+           })
+        });
+
+        function signInCallback(authResult) {
+            if (authResult['code']) {
+                console.log(authResult['code']);
+
+                // Hide the sign-in button now that the user is authorized, for example:
+                $('#signinButton').attr('style', 'display: none');
+
+                //// Send the code to the server
+                $.ajax({
+                    type: 'POST',
+                    url: '/gconnect?state={{STATE}}',
+                    contentType: 'application/octet-stream; charset=utf-8',
+                    success: function (result) {
+                        // Handle or verify the server response.
+                        if (result) {
+                            $('#login').hide();
+                            $('#result').html('Login Successful!<br>' + result + '</br>Rediecting...')
+                            setTimeout(function () {
+                                window.location.href = "/dashboard";
+                            }, 4000);
+                        }
+                        else if (authResult['error']) {
+                            console.log("There was an error: " + authResult['error']);
+                        }
+                        else {
+                            $('#result').html('Failed to make a server side call. Check your configuration' +
+                                    ' and console');
+                        }
+                    },
+                    processData: false,
+                    data: authResult['code']
+                });
+            } else {
+                // There was an error.
+            }
+        }
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '606353289504431',
+                cookie: true,  // enable cookies to allow the server to access
+                               // the session
+                xfbml: true,  // parse social plugins on this page
+                version: 'v2.2' // use version 2.2
+            });
+
+        };
+
+        // Load the SDK asynchronously
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        function sendTokenToServer()
+        {
+            var access_token = FB.getAuthResponse()['accessToken'];
+            console.log(access_token);
+            FB.api('/me', function (response) {
+                console.log("Successful login for: " + response.name);
+                $.ajax({
+                    type: 'POST',
+                    url: '/fbconnect?state={{STATE}}',
+                    processData: false,
+                    data: access_token,
+                    contentType: 'application/octet-stream; charset=utf-8',
+                    success: function(result) {
+                        if(result) {
+                            $('#login').hide();
+                            $('#result').html('Login Successful!<br>' + result + '</br>Rediecting...')
+                            setTimeout(function () {
+                                window.location.href = "/dashboard";
+                            }, 4000);
+                        }
+                        else {
+                            $('#result').html('Failed to make a server side call. Check your configuration' +
+                                    ' and console');
+                        }
+                    }
+                });
+
+            })
+        }
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-text navbar-right">
+                {% if current_user.is_authenticated() %}
+                    <a href="{{ url_for('auth.logout') }}">Sign Out</a>
+                {% else %}
+                    <a href="{{ url_for('auth.login') }}">Sign In</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <br><br>
+    <div class="container" id="login">
+        <form role="form" method="post" action="/submit?state={{ STATE }}">
+            <fieldset>
+                <legend>Login</legend>
+
+                <div class="form-group">
+                    <label for="email" class="control-label col-md-12">Email:</label>
+
+                    <div class="col-md-6">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Email"/>
+                    </div>
+                </div>
+
+                <br><br><br><br>
+
+                <div class="form-group">
+                    <label for="password" class="control-label col-md-12">Password:</label>
+
+                    <div class="col-md-6">
+                        <input type="password" class="form-control" name="password" id="password"
+                               placeholder="password"/>
+                    </div>
+                </div>
+
+                <br><br><br><br>
+
+                <div class="form-group col-md-12">
+                    <input class="btn btn-success" type="submit">
+                </div>
+            </fieldset>
+        </form>
+
+        <br><br>
+
+        <form role="form">
+            <fieldset>
+                <legend>Or</legend>
+                <div class="form-group">
+                    <div>
+                        <div id="signinButton" class="col-md-2">
+                        <span class="g-signin"
+                              data-scope="openid email"
+                              data-clientid="724210304088-6p9u4l3sr4n840itcl054b3cctkbf6ur"
+                              data-redirecturi="postmessage"
+                              data-accesstype="offline"
+                              data-cookiepolicy="single_host_origin"
+                              data-callback="signInCallback">
+                        </span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button>
+                            <fb:login-button scope="public_profile,email" onlogin="sendTokenToServer();">
+                                Login with Facebook
+                            </fb:login-button>
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+    <div id="result">
+        <ul>
+            {% if current_user.is_authenticated() %}
+                <li>Print this</li>
+            {% else %}
+                <li>Or this</li>
+            {% endif %}
+        </ul>
+    </div>
+</body>
+</html>
