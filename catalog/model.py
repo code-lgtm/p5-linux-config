@@ -120,7 +120,8 @@ class Category(db.Model):
 
     def to_json(self):
         json_post = {
-            self.name : [item.to_json() for item in self.items]
+            self.id,
+            self.name
         }
         return json_post
 
@@ -132,7 +133,7 @@ class Item(db.Model):
     __tablename__ = 'items'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), unique=True)
+    name = db.Column(db.String(50))
     description = db.Column(db.Text)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'), index=True)

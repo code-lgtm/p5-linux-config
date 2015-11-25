@@ -1,12 +1,13 @@
 import random, string, json, os, httplib2, requests
 from . import auth
-from flask import render_template, flash,make_response, request
+from flask import render_template, flash,make_response, request, redirect
 from flask import session as login_session
-from flask.ext.login import current_user
+from flask.ext.login import current_user, login_user
 from oauth2client.client import flow_from_clientsecrets, FlowExchangeError
+from ..model import User, Category
 
 
-@auth.route('/login')
+@auth.route('/login', methods=['GET', 'POST'])
 def login():
     """
     Entry to the application. Renders Login Page
@@ -29,10 +30,19 @@ def submit():
         response.headers['Content-Type'] = 'application/json'
         return response
 
-    response = make_response(json.dumps("Successfully authenticated"), 200)
-    response.headers['Content-Type'] = 'application/json'
+    email = request.form['email']
+    user = User.query.filter_by(email=email).first()
 
-    return response
+    if user is not None and user.verify_password(request.form['password']):
+        login_user(user)
+        categories = Category.query.all()
+        return render_template('main/dashboard.html', categories=categories)
+
+    flash('Invalid username or password')
+    state = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in xrange(32))
+    login_session['state'] = state
+    return render_template('auth/login.html', STATE=state)
+
 
 @auth.route('/fbconnect', methods=['POST'])
 def fbconnect():
