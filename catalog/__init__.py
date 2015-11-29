@@ -2,10 +2,12 @@ from flask import Flask
 from config import Config
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
+from flask.ext.bootstrap import Bootstrap
 
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
-login_manager.login_view = 'login'
+login_manager.login_view = 'auth.login'
+bootstrap = Bootstrap()
 
 db = SQLAlchemy()
 
@@ -13,6 +15,7 @@ def create_app(confilg_file=None):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_object(Config)
     Config.init_app(app)
+    bootstrap.init_app(app)
 
     if confilg_file is not None:
         app.config.from_pyfile(confilg_file, silent=True)

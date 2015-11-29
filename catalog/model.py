@@ -1,5 +1,5 @@
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask.ext.login import UserMixin, AnonymousUserMixin
+from flask.ext.login import UserMixin, AnonymousUserMixin, current_user
 from flask import current_app, url_for
 from . import db
 from . import login_manager
@@ -120,8 +120,8 @@ class Category(db.Model):
 
     def to_json(self):
         json_post = {
-            self.id,
-            self.name
+            'id' : self.id,
+            'name' : self.name
         }
         return json_post
 
@@ -139,13 +139,22 @@ class Item(db.Model):
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'), index=True)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
+    def isOwner(self):
+        if not current_user.is_authenticated():
+            return 0
+        if int(current_user.get_id()) == self.owner_id:
+            return 1
+        return 0
+
+
     def to_json(self):
         json_post = {
+            'id' : self.id,
             'name' : self.name,
-            'user_id' : self.owner_id,
+            'isOwner' : self.isOwner(),
             'timestamp' : str(self.timestamp),
             'description' : self.description,
-            'category' : self.category_id
+            'category' : self.category_id,
         }
         return json_post
 

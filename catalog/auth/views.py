@@ -2,10 +2,16 @@ import random, string, json, os, httplib2, requests
 from . import auth
 from flask import render_template, flash,make_response, request, redirect
 from flask import session as login_session
-from flask.ext.login import current_user, login_user
+from flask.ext.login import current_user, login_user, logout_user
 from oauth2client.client import flow_from_clientsecrets, FlowExchangeError
-from ..model import User, Category
+from flask import url_for
+from forms import RegistrationForm, LoginForm
+from ..model import User
+from catalog import db
 
+file_path = os.path.dirname(__file__)
+filename = os.path.join(file_path, 'secrets/client_secrets.json')
+CLIENT_ID = json.loads(open(filename, 'r').read())['web']['client_id']
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -18,31 +24,33 @@ def login():
 
     Redirects to dashboard page if user is already logged in
     """
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user is not None and user.verify_password(form.password.data):
+            login_user(user)
+            return redirect(url_for('main.dashboard'))
+        else:
+            flash('Username or password invalid')
+
+    if current_user.is_authenticated():
+        return redirect(url_for('main.dashboard'))
+
     state = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in xrange(32))
     login_session['state'] = state
-    print current_user
-    return render_template('auth/login.html', STATE=state)
+    return render_template('auth/login.html', STATE=state, form=form)
 
-@auth.route('/submit', methods=['POST'])
-def submit():
-    if request.args.get('state') != login_session['state']:
-        response = make_response(json.dumps('Invalid State Token'), 401)
-        response.headers['Content-Type'] = 'application/json'
-        return response
-
-    email = request.form['email']
-    user = User.query.filter_by(email=email).first()
-
-    if user is not None and user.verify_password(request.form['password']):
-        login_user(user)
-        categories = Category.query.all()
-        return render_template('main/dashboard.html', categories=categories)
-
-    flash('Invalid username or password')
-    state = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in xrange(32))
-    login_session['state'] = state
-    return render_template('auth/login.html', STATE=state)
-
+@auth.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        user = User(email=form.email.data,
+                    name=form.username.data,
+                    password=form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for('auth.login'))
+    return render_template('auth/register.html', form=form)
 
 @auth.route('/fbconnect', methods=['POST'])
 def fbconnect():
@@ -100,23 +108,16 @@ def fbconnect():
     login_session['picture'] = data["data"]["url"]
 
     # see if a user exists, if it doesn't make a new one
-    user_id = get_userid()
-    if not user_id:
-        user_id = create_social_user(login_session['email'], login_session['username'],' ')
-    login_session['user_id'] = user_id
+    user = User.query.filter_by(email=login_session['email']).first()
+    if not user:
+        new_user = User(email=login_session['email'], name=login_session['username'])
+        login_user(new_user)
+        login_session['user_id'] = new_user.id
+    else:
+        login_user(user)
+        login_session['user_id'] = user.id
 
-    output = ''
-    output += '<h1>Welcome, '
-    output += login_session['username']
-    output += '!</h1>'
-
-    output += '<img src="'
-    output += login_session['picture']
-    output += '" style="width: 300px; height: 300px;">'
-
-    flash("You are now logged in as %s" % login_session['username'])
-
-    return output
+    return redirect(url_for('main.dashboard'))
 
 @auth.route('/gconnect', methods=['POST'])
 def gconnect():
@@ -148,6 +149,7 @@ def gconnect():
         global filename
         o_auth_flow = flow_from_clientsecrets(filename,
                                               scope='')
+        o_auth_flow.params['access-type'] = 'offline'
         o_auth_flow.redirect_uri = 'postmessage'
         credentials = o_auth_flow.step2_exchange(code)
     except FlowExchangeError as excep:
@@ -206,24 +208,19 @@ def gconnect():
     # response.headers['Content-Type'] = 'application/json'
 
     # see if a user exists, if it doesn't make a new one
-    user_id = get_userid()
-    if not user_id:
-        user_id = create_social_user(data['email'], data['given_name'],
-                              data['family_name'])
-    login_session['user_id'] = user_id
+    user = User.query.filter_by(email=data['email']).first()
+    if not user:
+        new_user = User(email=data['email'], name=data['given_name'])
+        db.session.add(new_user)
+        db.session.commit()
+        login_user(new_user)
+        login_session['user_id'] = new_user.id
+    else:
+        print "Am I here"
+        login_session['user_id'] = user.id
+        login_user(user)
 
-    output = ''
-    output += '<h1>Welcome, '
-    output += login_session['username']
-    output += '!</h1>'
-
-    output += '<img src="'
-    output += login_session['picture']
-    output += '" style="width: 300px; height: 300px;">'
-
-    flash("You are now logged in as %s" % login_session['username'])
-
-    return output
+    return redirect(url_for('main.dashboard'))
 
 @auth.route('/fbdisconnect')
 def fbdisconnect():
@@ -277,6 +274,8 @@ def gdisconnect():
         del login_session['username']
         del login_session['email']
         del login_session['picture']
+        del login_session['user_id']
+        del login_session['family_name']
 
         response = make_response(json.dumps("Successfully disconnected"), 200)
         response.headers['Content-Type'] = 'application/json'
@@ -286,6 +285,42 @@ def gdisconnect():
         response = make_response(json.dumps('Failed to revoke token for the given user.'), 400)
         response.headers['Content-Type'] = 'application/json'
         return response
+
+@auth.route('/logout')
+def logout():
+    del login_session['state']
+
+    credentials = login_session.get('credentials')
+    if credentials is not None:
+            # Execute HTTP GET request to revoke current token
+            access_token = credentials.access_token
+            url = ('https://accounts.google.com/o/oauth2/revoke?token=%s' % access_token)
+            h = httplib2.Http()
+            result = h.request(url, 'GET')[0]
+
+            if result['status'] == '200':
+                del login_session['credentials']
+                del login_session['gplus_id']
+                del login_session['username']
+                del login_session['email']
+                del login_session['picture']
+                del login_session['user_id']
+                del login_session['family_name']
+
+    if login_session.get('facebook_id') is not None:
+        facebook_id = login_session['facebook_id']
+        url = 'https://graph.facebook.com/%s/permissions' % facebook_id
+        h = httplib2.Http()
+        result = h.request(url, 'DELETE')[1]
+        del login_session['username']
+        del login_session['email']
+        del login_session['picture']
+        del login_session['user_id']
+        del login_session['facebook_id']
+
+    logout_user()
+
+    return redirect(url_for('main.dashboard'))
 
 def get_name():
     return 'authentication server'

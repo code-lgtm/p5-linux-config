@@ -1,29 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
+    {% import "bootstrap/wtf.html" as wtf %}
     <title>Codellect Login</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-    <script src="{{ url_for('static', filename='lib/jquery-2.1.4.js') }}"></script>
-    <script src="{{ url_for('static', filename='lib/bootstrap.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/controller.js') }}"></script>
     <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
     <script>
-        $(function() {
-           $('#loginform').click(function(){
-               var postData = $(this).serializeArray()
-               $.ajax({
-                  type: 'POST',
-                   url: '/submit?state={{ STATE }}',
-                   contentType: 'multipart/form-data; charset=utf-8',
-                   data: postData,
-                   success: function (result) {
-                       console.log("In Here");
-                   }
-               });
-           })
-        });
-
         function signInCallback(authResult) {
             if (authResult['code']) {
                 console.log(authResult['code']);
@@ -82,8 +65,7 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
 
-        function sendTokenToServer()
-        {
+        function sendTokenToServer() {
             var access_token = FB.getAuthResponse()['accessToken'];
             console.log(access_token);
             FB.api('/me', function (response) {
@@ -94,8 +76,8 @@
                     processData: false,
                     data: access_token,
                     contentType: 'application/octet-stream; charset=utf-8',
-                    success: function(result) {
-                        if(result) {
+                    success: function (result) {
+                        if (result) {
                             $('#login').hide();
                             $('#result').html('Login Successful!<br>' + result + '</br>Rediecting...')
                             setTimeout(function () {
@@ -114,50 +96,35 @@
     </script>
 </head>
 <body>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Catalog</a>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Catalog</a>
+    </div>
+</nav>
+
+<br><br>
+
+<div class="container" id="login">
+    <div class="col-md-12">
+        <div class="col-md-4">
+            {% for message in get_flashed_messages() %}
+                <div class="alert alert-warning">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ message }}
+                </div>
+            {% endfor %}
         </div>
-    </nav>
-
-    <br><br>
-    <div class="container" id="login">
-        <form role="form" method="post" action="/submit?state={{ STATE }}">
-            <fieldset>
-                <legend>Login</legend>
-
-                <div class="form-group">
-                    <label for="email" class="control-label col-md-12">Email:</label>
-
-                    <div class="col-md-6">
-                        <input type="email" class="form-control" name="email" id="email" placeholder="Email"/>
-                    </div>
-                </div>
-
-                <br><br><br><br>
-
-                <div class="form-group">
-                    <label for="password" class="control-label col-md-12">Password:</label>
-
-                    <div class="col-md-6">
-                        <input type="password" class="form-control" name="password" id="password"
-                               placeholder="password"/>
-                    </div>
-                </div>
-
-                <br><br><br><br>
-
-                <div class="form-group col-md-12">
-                    <input class="btn btn-success" type="submit">
-                </div>
-            </fieldset>
-        </form>
-
-        <br><br>
-
+    </div>
+    <div>
+        <div class="col-md-4">
+            {{ wtf.quick_form(form) }}
+            <a class="btn btn-link" href="/register?state={{ STATE }}">New Users: Click Here</a>
+        </div>
+        <div class="col.md-8"></div>
+    </div>
+    <div class="col-md-12">
         <form role="form">
             <fieldset>
-                <legend>Or</legend>
                 <div class="form-group">
                     <div>
                         <div id="signinButton" class="col-md-2">
@@ -182,15 +149,9 @@
             </fieldset>
         </form>
     </div>
+</div>
+<script src="{{ url_for('static', filename='lib/jquery-2.1.4.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/bootstrap.js') }}"></script>
 
-    <div id="result">
-        <ul>
-            {% if current_user.is_authenticated() %}
-                <li>Print this</li>
-            {% else %}
-                <li>Or this</li>
-            {% endif %}
-        </ul>
-    </div>
 </body>
 </html>
