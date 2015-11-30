@@ -1,4 +1,7 @@
-__author__ = 'Kumar_Garg'
+"""
+Default confgiruations for application. Can be overwritten by providing
+application config file while creating the application
+"""
 
 class Config(object):
     SECRET_KEY = '1qlUcb4T7DFDpp5vv3_'

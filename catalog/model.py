@@ -6,7 +6,12 @@ from . import login_manager
 import os
 from datetime import datetime
 
+
 class Permission:
+    """
+    Constants specifying as application specific tasks
+    (defined as bit constants)
+    """
     VIEW_CATALOG = 0x01
     WRITE_ITEMS = 0x02
     MODERATE_CONTENT = 0x04
@@ -62,14 +67,19 @@ class User(UserMixin, db.Model):
     def is_administrator(self):
         return self.can(Permission.ADMINISTER)
 
-
     def __repr__(self):
         return "<username : %s>" % self.name
 
+
 class AnonymousUser(AnonymousUserMixin):
+    """ If user is not currently logged in, user is treated as
+    an anonymous user. View Catalog categories and item privilges
+    are provided to an anonymous user
+    """
+
     def can(self, permissions):
-        if(permissions == Permission.VIEW_CATALOG or \
-           permissions == Permission.VIEW_CATALOG):
+        if (permissions == Permission.VIEW_CATALOG or \
+                        permissions == Permission.VIEW_CATALOG):
             return True
         else:
             return False
@@ -77,9 +87,10 @@ class AnonymousUser(AnonymousUserMixin):
     def is_administrator(self):
         return False
 
+
 class Role(db.Model):
     """
-
+    Created discreet roles and permissions for the these roles
     """
     __tablename__ = 'roles'
 
@@ -91,6 +102,13 @@ class Role(db.Model):
 
     @staticmethod
     def insert_roles():
+        """
+        Add three roles in the application:
+        1) User - Have privileges to view, update and add items
+        2) Moderator - Have privileges to view, update add and moderate items
+        3) Administrator - Have all privileges
+        :return:
+        """
         roles = {
             'User': (Permission.VIEW_CATALOG |
                      Permission.WRITE_ITEMS, True),
@@ -109,9 +127,13 @@ class Role(db.Model):
         db.session.commit()
 
     def __repr__(self):
-        return '<Role %s>'% self.name
+        return '<Role %s>' % self.name
+
 
 class Category(db.Model):
+    """
+    Represents a category in the application
+    """
     __tablename__ = 'categories'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -120,8 +142,8 @@ class Category(db.Model):
 
     def to_json(self):
         json_post = {
-            'id' : self.id,
-            'name' : self.name
+            'id': self.id,
+            'name': self.name
         }
         return json_post
 
@@ -130,10 +152,13 @@ class Category(db.Model):
 
 
 class Item(db.Model):
+    """
+    Represents an item in the category
+    """
     __tablename__ = 'items'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50))
+    name = db.Column(db.String(64))
     description = db.Column(db.Text)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'), index=True)
@@ -146,15 +171,14 @@ class Item(db.Model):
             return 1
         return 0
 
-
     def to_json(self):
         json_post = {
-            'id' : self.id,
-            'name' : self.name,
-            'isOwner' : self.isOwner(),
-            'timestamp' : str(self.timestamp),
-            'description' : self.description,
-            'category' : self.category_id,
+            'id': self.id,
+            'name': self.name,
+            'isOwner': self.isOwner(),
+            'timestamp': str(self.timestamp),
+            'description': self.description,
+            'category': self.category_id,
         }
         return json_post
 

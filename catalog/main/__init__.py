@@ -1,4 +1,6 @@
-__author__ = 'Kumar_Garg'
+"""
+Package consists of the key functional areas of the application
+"""
 
 from flask import Blueprint
 
@@ -9,6 +11,12 @@ from ..model import Permission
 
 @main.app_context_processor
 def inject_permissions():
+    """
+    Context processor to make permissions available to templates
+
+    :return:
+    Dictionary containing Permission class and its bit constants
+    """
     return dict(Permission = Permission)
 
 

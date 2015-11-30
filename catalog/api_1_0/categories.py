@@ -1,4 +1,6 @@
-__author__ = 'Kumar_Garg'
+"""
+API's exposed by application
+"""
 
 from . import api
 from ..model import Category, Item
@@ -32,8 +34,8 @@ def get_categories():
 @api.route('/category/<int:id>')
 def category(id):
     """
-    Provide list of items in the specified category. User Login is not required
-    to access item list
+    Provide list of items in the specified category.
+    User Login is not required to access item list
 
     :param
     id: unique identifier of the cateory

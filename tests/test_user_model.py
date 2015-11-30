@@ -1,3 +1,7 @@
+"""
+Authorization Test Cases
+"""
+
 from catalog.model import User, Role, Permission, AnonymousUser
 import unittest
 from catalog import create_app, db

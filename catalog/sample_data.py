@@ -1,4 +1,6 @@
-__author__ = 'Kumar_Garg'
+"""
+Script to add sample data in the database
+"""
 
 from model import User, Role, Item, Category
 from catalog import db
@@ -7,12 +9,13 @@ from catalog import db
 Role.insert_roles()
 
 # Add users
-user1 = User(name='Gaurav', email='a@b.com', password='test', age=25)
-user2 = User(name='Kumar', email='b@c.com', password='test', age=25)
-user3 = User(name='Garg', email='c@d.com', password='test', age=25)
-user4 = User(name='user', email='d@e.com', password='test', age=25)
-user5 = User(name='another_user', email='e@f.com', password='test', age=25)
+user1 = User(name='John', email='a@b.com', password='test')
+user2 = User(name='Mary', email='b@c.com', password='test')
+user3 = User(name='Bob', email='c@d.com', password='test')
+user4 = User(name='Mike', email='d@e.com', password='test')
+user5 = User(name='Estella', email='e@f.com', password='test')
 
+# Add users in the db session
 db.session.add(user1)
 db.session.add(user2)
 db.session.add(user3)
@@ -32,6 +35,7 @@ category8 = Category(name='Tennis')
 category9 = Category(name='Table Tennis')
 category10 = Category(name='Football')
 
+# Add Categories in the db session
 db.session.add(category1)
 db.session.add(category2)
 db.session.add(category3)
