@@ -28,17 +28,17 @@ Setting up and running server:
              
 -------------------------------------------------------------------------------  
   
-Available routes:  
+<b>Available routes:<\b>  
 1) http://\<servername\>:\<port no\>/login  
-2) http://<servername>:<port no>/register  
-3) http://<servername>:<port no>/login  
-4) http://<servername>:<port no>  
-   http://<servername>:<port no>/dashboard  
-5) http://<servername>:<port no>/edit/item/<item id>  
-6) http://<servername>:<port no>/add/item/<item id>  
-7) http://<servername>:<port no>/delete/item/<item id>  
-8) http://<servername>:<port no>/api/v1.0/categories/  
-9) http://<servername>:<port no>/api/v1.0/category/<category id>  
+2) http://\<servername\>:\<port no\>/register  
+3) http://\<servername\>:\<port no\>/login  
+4) http://\<servername\>:\<port no\>  
+   http://\<servername\>:\<port no\>/dashboard  
+5) http://\<servername\>:<port no>/edit/item/\<item id\>  
+6) http://\<servername\>:\<port no\>/add/item/\<item id\>  
+7) http://\<servername\>:\<port no\>/delete/item/\<item id\>  
+8) http://\<servername\>:\<port no\>/api/v1.0/categories/  
+9) http://\<servername\>:\<port no\>/api/v1.0/category/\<category id\>  
   
 -------------------------------------------------------------------------------  
   
