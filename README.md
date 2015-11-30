@@ -51,9 +51,9 @@
   
 -------------------------------------------------------------------------------  
 
-<b> Commonly Used Commands: </b> 
+<b> Commonly Used Commands: </b>   
 1) python manage.py runserver --To run server  
 2) python manage.py test --oTo run unit tests  
 3) python manage.py db migrate -m \"Message\"   -- To automatically create scripts for schema changes  
 4) python manage.py db upgrade --To apply latest schema  
-  
+5) python manage.py shell --To launch Python shell with different modules already imported  
