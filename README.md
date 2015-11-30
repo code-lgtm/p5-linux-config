@@ -29,7 +29,7 @@ Setting up and running server:
 -------------------------------------------------------------------------------  
   
 Available routes:  
-1) http://<servername>:<port no>/login  
+1) http://\<servername\>:\<port no\>/login  
 2) http://<servername>:<port no>/register  
 3) http://<servername>:<port no>/login  
 4) http://<servername>:<port no>  
