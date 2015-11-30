@@ -1,9 +1,9 @@
 # fullstack
 
-FullStack Project using Flask Micro framework  
+<b>FullStack Project using Flask Micro framework</b>  
 
 -------------------------------------------------------------------------------  
-Setting up and running server:  
+<b>Setting up and running server:</b>  
    --- Install software using command  
         sudo apt-get install libpq-dev python-dev  
    --- Do a latest chekout from the repsitory: https://github.com/kumaratinfy/fullstack.git  
@@ -28,7 +28,7 @@ Setting up and running server:
              
 -------------------------------------------------------------------------------  
   
-<b>Available routes:<\b>  
+<b>Available routes:</b>  
 1) http://\<servername\>:\<port no\>/login  
 2) http://\<servername\>:\<port no\>/register  
 3) http://\<servername\>:\<port no\>/login  
@@ -42,7 +42,7 @@ Setting up and running server:
   
 -------------------------------------------------------------------------------  
   
-Available logins:  
+<b>Available logins:</b>    
 1) Email : a@b.com Password: test  
 2) Email : b@c.com Password: test  
 3) Email : c@d.com Password: test  
