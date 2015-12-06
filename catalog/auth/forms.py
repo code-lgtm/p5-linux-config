@@ -8,7 +8,6 @@ from wtforms.validators import Length, Email, DataRequired, Regexp, EqualTo
 from wtforms import ValidationError
 from ..model import User
 
-
 class LoginForm(Form):
     """
     Login Web Form

@@ -10,9 +10,9 @@ from . import main
 from flask import render_template
 from ..model import Category, Item
 from forms import EditForm, AddForm
-from flask import abort, redirect, url_for
+from flask import abort, redirect, url_for, request
 from flask.ext.login import login_required, current_user
-from catalog import db
+from catalog import db, csrf
 import bleach
 
 
@@ -30,7 +30,6 @@ def dashboard():
     """
     categories = Category.query.all()
     return render_template('main/dashboard.html', categories=categories)
-
 
 @main.route('/edit/item/<int:id>', methods=['GET', 'POST'])
 @login_required
@@ -60,7 +59,6 @@ def editItem(id):
 
     return render_template('main/editItem.html', form=form)
 
-
 @main.route('/add/item', methods=['GET', 'POST'])
 @login_required
 def addItem():
@@ -88,9 +86,9 @@ def addItem():
     return render_template('main/addItem.html', form=form)
 
 
-@main.route('/delete/item/<int:id>', methods=['GET'])
+@main.route('/delete/item', methods=['POST'])
 @login_required
-def deleteItem(id):
+def deleteItem():
     """
     Deletes an item
 
@@ -98,6 +96,7 @@ def deleteItem(id):
     :return: 403 : If logged in user is not the owner of the page
              else redirects to dashboard page after deleting the item
     """
+    id = request.form['delId']
     item = Item.query.filter_by(id=id).first()
 
     if item is not None:

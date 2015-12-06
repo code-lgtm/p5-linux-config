@@ -7,6 +7,7 @@ from config import Config
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
 from flask.ext.bootstrap import Bootstrap
+from flask_wtf import CsrfProtect
 
 # Initialize Flask-Login extension for management of user sessions
 login_manager = LoginManager()
@@ -18,6 +19,9 @@ bootstrap = Bootstrap()
 
 # Initialize Flask-SQL Alchemy Extension
 db = SQLAlchemy()
+
+# Prevention of Cross-Site Request Forgery Attacks
+csrf = CsrfProtect()
 
 
 def create_app(confilg_file=None):
@@ -37,6 +41,7 @@ def create_app(confilg_file=None):
     app.config.from_object(Config)
     Config.init_app(app)
     bootstrap.init_app(app)
+    csrf.init_app(app)
 
     # Read and apply configurations from the file provided in the application
     # factory

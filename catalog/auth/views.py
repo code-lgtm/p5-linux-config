@@ -16,13 +16,12 @@ from oauth2client.client import flow_from_clientsecrets, FlowExchangeError
 from flask import url_for, abort
 from forms import RegistrationForm, LoginForm
 from ..model import User
-from catalog import db
+from catalog import db, csrf
 
 # Extract CLIENT_ID from the secrets file downloaded from Google website
 file_path = os.path.dirname(__file__)
 filename = os.path.join(file_path, 'secrets/client_secrets.json')
 CLIENT_ID = json.loads(open(filename, 'r').read())['web']['client_id']
-
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -48,9 +47,7 @@ def login():
     if current_user.is_authenticated():
         return redirect(url_for('main.dashboard'))
 
-    state = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in xrange(32))
-    login_session['state'] = state
-    return render_template('auth/login.html', STATE=state, form=form)
+    return render_template('auth/login.html', form=form)
 
 
 @auth.route('/register', methods=['GET', 'POST'])
@@ -88,8 +85,6 @@ def fbconnect():
     1) 401 - Invalid State Token - if the state token is invalid
     2) If login succeeds - Redirects to dashboard page
     """
-    if request.args.get('state') != login_session['state']:
-        abort(401)
     access_token = request.data
 
     # Exchange client token for long-lived server side token
@@ -158,8 +153,6 @@ def gconnect():
     5) 401 - Token's Client ID does not match app's
     6) Redirect to dashboard is login is successful
     """
-    if request.args.get('state') != login_session['state']:
-        abort(401)
     code = request.data
 
     try:
@@ -233,7 +226,6 @@ def logout():
 
     :return:
     """
-    del login_session['state']
 
     credentials = login_session.get('credentials')
     if credentials is not None:

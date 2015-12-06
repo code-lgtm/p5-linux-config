@@ -4,6 +4,7 @@
     {% import "bootstrap/wtf.html" as wtf %}
     <title>Codellect Login</title>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
     <script>
@@ -15,9 +16,19 @@
                 $('#signinButton').attr('style', 'display: none');
 
                 //// Send the code to the server
+                var csrftoken = $('meta[name=csrf-token]').attr('content')
+
+                $.ajaxSetup({
+                    beforeSend: function (xhr, settings) {
+                        if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                            xhr.setRequestHeader("X-CSRFToken", csrftoken)
+                        }
+                    }
+                })
+
                 $.ajax({
                     type: 'POST',
-                    url: '/gconnect?state={{STATE}}',
+                    url: '/gconnect',
                     contentType: 'application/octet-stream; charset=utf-8',
                     success: function (result) {
                         // Handle or verify the server response.
@@ -69,10 +80,19 @@
             var access_token = FB.getAuthResponse()['accessToken'];
             console.log(access_token);
             FB.api('/me', function (response) {
-                console.log("Successful login for: " + response.name);
+                var csrftoken = $('meta[name=csrf-token]').attr('content')
+
+                $.ajaxSetup({
+                    beforeSend: function (xhr, settings) {
+                        if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                            xhr.setRequestHeader("X-CSRFToken", csrftoken)
+                        }
+                    }
+                })
+
                 $.ajax({
                     type: 'POST',
-                    url: '/fbconnect?state={{STATE}}',
+                    url: '/fbconnect',
                     processData: false,
                     data: access_token,
                     contentType: 'application/octet-stream; charset=utf-8',
@@ -118,7 +138,7 @@
     <div>
         <div class="col-md-4">
             {{ wtf.quick_form(form) }}
-            <a class="btn btn-link" href="/register?state={{ STATE }}">New Users: Click Here</a>
+            <a class="btn btn-link" href="/register">New Users: Click Here</a>
         </div>
         <div class="col.md-8"></div>
     </div>

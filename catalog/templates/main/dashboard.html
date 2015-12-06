@@ -138,9 +138,14 @@ function editItem(id)
 
 function deleteItem(id)
 {
-    location.href= '/delete/item/'+id;
+    $("#delId").val(id);
+    $('#delete').submit();
 }
 
 </script>
+<form style="display: hidden" action = '/delete/item' method="post" id="delete">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" id="delId" name="delId" value="">
+</form>
 </body>
 </html>
