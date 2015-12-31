@@ -43,6 +43,14 @@ def test():
     tests = unittest.TestLoader().discover('tests')
     unittest.TextTestRunner(verbosity=2).run(tests)
 
+@manager.command
+def deploy():
+    from flask.ext.migrate import upgrade
+    upgrade()
+
+    from catalog import sample_data as data
+    data.main()
+
 
 manager.add_command("shell", Shell(make_context=_make_context))
 
