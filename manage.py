@@ -43,6 +43,7 @@ def test():
     tests = unittest.TestLoader().discover('tests')
     unittest.TextTestRunner(verbosity=2).run(tests)
 
+# Set up roles and push initial data into database
 @manager.command
 def deploy():
     from flask.ext.migrate import upgrade
