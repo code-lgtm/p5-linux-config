@@ -37,6 +37,7 @@ SSH Port : 2200
          &nbsp;&nbsp;&nbsp;&nbsp;-- SSH (port 2200)    
 	 &nbsp;&nbsp;&nbsp;&nbsp;-- http(port 80)  
 	 &nbsp;&nbsp;&nbsp;&nbsp;-- NTP(port 123)  
+  
 -----------------------------------------------------------------------------------------------------------  
 <b>Setting up Apache Server:</b>  
    &nbsp;&nbsp;--- Do a latest chekout from the following repsitory in the home directory /home/grader   
@@ -64,7 +65,8 @@ SSH Port : 2200
    &nbsp;&nbsp;--- Move the following folder from /home/grader/p5-linux-config to /var/www/fullstack  
        &nbsp;&nbsp;&nbsp;&nbsp; -- venv  
    &nbsp;&nbsp;--- Copy the following file from /home/grader/pf-linus-config to /etc/apache2/sites-available  
-       &nbsp;&nbsp;&nbsp;&nbsp; -- catalog.conf       
+       &nbsp;&nbsp;&nbsp;&nbsp; -- catalog.conf
+  
 ---------------------------------------------------------------------------------------------------------------  
 <b>Setting up Postgres:</b>
   &nbsp;&nbsp;--- Go to psql shell using the following command  
@@ -89,6 +91,7 @@ SSH Port : 2200
       &nbsp;&nbsp;&nbsp;&nbsp;-- sudo a2ensite catalog  
       &nbsp;&nbsp;&nbsp;&nbsp;-- sudo service apache2 reload  
       &nbsp;&nbsp;&nbsp;&nbsp;-- sudo service apache2 restart  
+  
 ---------------------------------------------------------------------------------------------------------------  
 <b>Available routes:</b>  
 1) http://\<servername\>:\<port no\>/login  
