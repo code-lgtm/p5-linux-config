@@ -68,7 +68,7 @@ SSH Port : 2200
        &nbsp;&nbsp;&nbsp;&nbsp; -- catalog.conf
   
 ---------------------------------------------------------------------------------------------------------------  
-<b>Setting up Postgres:</b>
+<b>Setting up Postgres:</b>  
   &nbsp;&nbsp;--- Go to psql shell using the following command  
       &nbsp;&nbsp;&nbsp;&nbsp;-- sudo -u postgres psql  
       &nbsp;&nbsp;&nbsp;&nbsp;-- Create a new database catalog  
@@ -85,7 +85,7 @@ SSH Port : 2200
       &nbsp;&nbsp;&nbsp;&nbsp;-- SQLALCHEMY_DATABASE_URI = 'postgresql://catalog:<password>@localhost:5432/catalog'   
       
 ---------------------------------------------------------------------------------------------------------------  
-<b>Running Apache</b>
+<b>Running Apache</b>  
   &nbsp;&nbsp;---  Run the following commands to run web site under apache2  
       &nbsp;&nbsp;&nbsp;&nbsp;-- sudo a2dissite 000-default  
       &nbsp;&nbsp;&nbsp;&nbsp;-- sudo a2ensite catalog  
