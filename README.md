@@ -25,18 +25,18 @@ SSH Port : 2200
    &nbsp;&nbsp;	-- python-virtualenv  
    &nbsp;&nbsp;	-- python2.7  
    &nbsp;&nbsp;	-- sendmail  
-	-- ufw  
-	-- unattended-upgrades  
+   &nbsp;&nbsp;	-- ufw  
+   &nbsp;&nbsp;	-- unattended-upgrades  
     
   --- Created a new user grader with sudo privileges  
   --- Disabled root ssh login by setting following parameter in the file /etc/ssh/sshd_config  
-          &nbsp;&nbsp;PermitRootLogin no  
+          &nbsp;&nbsp;&nbsp;&nbsp;PermitRootLogin no  
   --- Changed ssh port to 2200 by changing following parameter in the file /etc/ssh/sshd_config  
-          &nbsp;&nbsp;Port 2200  
+          &nbsp;&nbsp;&nbsp;&nbsp;Port 2200  
   --- Configured Uncomplicated Firewall (UFW) to only allow incoming connections from  
-         &nbsp;&nbsp;-- SSH (port 2200)    
-	 &nbsp;&nbsp;-- http(port 80)  
-	 &nbsp;&nbsp;-- NTP(port 123)  
+         &nbsp;&nbsp;&nbsp;&nbsp;-- SSH (port 2200)    
+	 &nbsp;&nbsp;&nbsp;&nbsp;-- http(port 80)  
+	 &nbsp;&nbsp;&nbsp;&nbsp;-- NTP(port 123)  
 -----------------------------------------------------------------------------------------------------------  
 <b>Setting up Apache Server:</b>  
    &nbsp;&nbsp;--- Do a latest chekout from the following repsitory in the home directory /home/grader   
@@ -62,9 +62,9 @@ SSH Port : 2200
        &nbsp;&nbsp;&nbsp;&nbsp;-- manage.py  
        &nbsp;&nbsp;&nbsp;&nbsp;-- requirements.txt  
    &nbsp;&nbsp;--- Move the following folder from /home/grader/p5-linux-config to /var/www/fullstack  
-       &nbsp;&nbsp;&nbsp;&nbsp;-- venv  
+       &nbsp;&nbsp;&nbsp;&nbsp; -- venv  
    &nbsp;&nbsp;--- Copy the following file from /home/grader/pf-linus-config to /etc/apache2/sites-available  
-       &nbsp;&nbsp;&nbsp;&nbsp;-- catalog.conf     
+       &nbsp;&nbsp;&nbsp;&nbsp; -- catalog.conf       
 ---------------------------------------------------------------------------------------------------------------  
 <b>Setting up Postgres:</b>
   &nbsp;&nbsp;--- Go to psql shell using the following command  
