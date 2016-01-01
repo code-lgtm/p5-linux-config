@@ -25,103 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/catalog/auth/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="4.5185184">
-              <caret line="228" column="0" selection-start-line="228" selection-start-column="0" selection-end-line="228" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/catalog/auth/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.296296">
-              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/catalog/main/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.703704">
-              <caret line="17" column="64" selection-start-line="17" selection-start-column="64" selection-end-line="17" selection-end-column="64" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/catalog/main/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.481482">
-              <caret line="30" column="14" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/catalog/api_1_0/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.5185184">
-              <caret line="4" column="27" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/catalog/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7670251">
-              <caret line="59" column="41" selection-start-line="59" selection-start-column="41" selection-end-line="59" selection-end-column="41" />
-              <folding>
-                <element signature="e#81#104#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="categories.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/catalog/api_1_0/categories.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-20.37037">
-              <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="errors.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="errors.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/catalog/api_1_0/errors.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-17.88889">
+            <state vertical-scroll-proportion="0.9850107">
               <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="catalog.wsgi" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/catalog.wsgi">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="10" column="43" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="application.cfg" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/instance/application.cfg">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -159,7 +67,6 @@
         <option value="$PROJECT_DIR$/catalog/main/__init__.py" />
         <option value="$PROJECT_DIR$/catalog/main/errors.py" />
         <option value="$PROJECT_DIR$/migrations/versions/15d7bbe87005_initial_version.py" />
-        <option value="$PROJECT_DIR$/catalog/api_1_0/categories.py" />
         <option value="$PROJECT_DIR$/catalog/decorators.py" />
         <option value="$PROJECT_DIR$/catalog/sample_data.py" />
         <option value="$PROJECT_DIR$/tests/test_user_model.py" />
@@ -173,12 +80,13 @@
         <option value="$PROJECT_DIR$/catalog/main/forms.py" />
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/catalog/templates/auth/login.html" />
-        <option value="$PROJECT_DIR$/catalog/auth/views.py" />
-        <option value="$PROJECT_DIR$/catalog/main/views.py" />
         <option value="$PROJECT_DIR$/manage.py" />
-        <option value="$PROJECT_DIR$/instance/application.cfg" />
         <option value="$PROJECT_DIR$/catalog.wsgi" />
         <option value="$PROJECT_DIR$/catalog/__init__.py" />
+        <option value="$PROJECT_DIR$/instance/application.cfg" />
+        <option value="$PROJECT_DIR$/catalog/api_1_0/categories.py" />
+        <option value="$PROJECT_DIR$/catalog/auth/views.py" />
+        <option value="$PROJECT_DIR$/catalog/main/views.py" />
       </list>
     </option>
   </component>
@@ -552,17 +460,18 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3184569" sideWeight="0.49312714" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3184569" sideWeight="0.49312714" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14845024" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21785174" sideWeight="0.50687283" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -570,7 +479,6 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16639479" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -907,42 +815,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/instance/application.cfg">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/catalog.wsgi">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="43" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
+        <state vertical-scroll-proportion="0.3785425">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/catalog/api_1_0/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.5185184">
+        <state vertical-scroll-proportion="0.14561027">
           <caret line="4" column="27" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog/api_1_0/categories.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.37037">
-          <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog/api_1_0/errors.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.88889">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -963,29 +847,53 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catalog/main/views.py">
+    <entry file="file://$PROJECT_DIR$/catalog/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.481482">
-          <caret line="30" column="14" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="14" />
+        <state vertical-scroll-proportion="0.91648823">
+          <caret line="59" column="41" selection-start-line="59" selection-start-column="41" selection-end-line="59" selection-end-column="41" />
+          <folding>
+            <element signature="e#81#104#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instance/application.cfg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.034412954">
+          <caret line="1" column="83" selection-start-line="1" selection-start-column="27" selection-end-line="1" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog/api_1_0/categories.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8201285">
+          <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/catalog/auth/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.5185184">
-          <caret line="228" column="0" selection-start-line="228" selection-start-column="0" selection-end-line="228" selection-end-column="0" />
+        <state vertical-scroll-proportion="-3.6296296">
+          <caret line="167" column="8" selection-start-line="167" selection-start-column="8" selection-end-line="167" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catalog/__init__.py">
+    <entry file="file://$PROJECT_DIR$/catalog/main/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7670251">
-          <caret line="59" column="41" selection-start-line="59" selection-start-column="41" selection-end-line="59" selection-end-column="41" />
-          <folding>
-            <element signature="e#81#104#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="1.9565217">
+          <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog/api_1_0/errors.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9850107">
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

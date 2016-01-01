@@ -72,8 +72,6 @@ def addItem():
     form = AddForm()
 
     if form.validate_on_submit():
-        print current_user.get_id()
-        print form.category.data
         item = Item(name=bleach.clean(form.name.data),
                     description=bleach.clean(form.description.data),
                     owner_id=int(current_user.get_id()),

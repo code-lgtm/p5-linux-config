@@ -56,6 +56,4 @@ def category(id):
     }
     """
     items = Item.query.filter(Item.category_id == id).all()
-    for item in items:
-        print item.to_json()
     return jsonify({"items": [item.to_json() for item in items]})
