@@ -11,94 +11,84 @@ SSH Port : 2200
 -------------------------------------------------------------------------------------------------------  
 <b>Setting up server:</b>  
    ---  Following softwares have been installed using command sudp apt-get install <package name>   
-        -- libpq-dev    
-	-- python-dev  
-	-- fail2ban  
-	-- apache2  
-	-- finger  
-	-- glances  
-	-- git  
-	-- libapache2-mod-wsgi    
-	-- postgresql  
-	-- postgresql-contrib  
-	-- python-pip  
-	-- python-virtualenv  
-	-- python2.7  
-	-- sendmail  
+   &nbsp;&nbsp; -- libpq-dev    
+   &nbsp;&nbsp;	-- python-dev  
+   &nbsp;&nbsp;	-- fail2ban  
+   &nbsp;&nbsp;	-- apache2  
+   &nbsp;&nbsp;	-- finger  
+   &nbsp;&nbsp;	-- glances  
+   &nbsp;&nbsp;	-- git  
+   &nbsp;&nbsp;	-- libapache2-mod-wsgi    
+   &nbsp;&nbsp;	-- postgresql  
+   &nbsp;&nbsp;	-- postgresql-contrib  
+   &nbsp;&nbsp;	-- python-pip  
+   &nbsp;&nbsp;	-- python-virtualenv  
+   &nbsp;&nbsp;	-- python2.7  
+   &nbsp;&nbsp;	-- sendmail  
 	-- ufw  
 	-- unattended-upgrades  
     
   --- Created a new user grader with sudo privileges  
   --- Disabled root ssh login by setting following parameter in the file /etc/ssh/sshd_config  
-          PermitRootLogin no  
+          &nbsp;&nbsp;PermitRootLogin no  
   --- Changed ssh port to 2200 by changing following parameter in the file /etc/ssh/sshd_config  
-          Port 2200  
+          &nbsp;&nbsp;Port 2200  
   --- Configured Uncomplicated Firewall (UFW) to only allow incoming connections from  
-         -- SSH (port 2200)    
-	 -- http(port 80)  
-	 -- NTP(port 123)  
+         &nbsp;&nbsp;-- SSH (port 2200)    
+	 &nbsp;&nbsp;-- http(port 80)  
+	 &nbsp;&nbsp;-- NTP(port 123)  
 -----------------------------------------------------------------------------------------------------------  
 <b>Setting up Apache Server:</b>  
-   --- Do a latest chekout from the following repsitory in the home directory /home/grader   
-           https://github.com/kumaratinfy/p5-linux-config.git  
-   --- From shell navigate inside the folder  
-       -- /home/grader/p5-linux-config  
-   --- Swicth to root user using the following command sudo -s  
-   --- create a virtual environment using the command:  
-           virtualenv venv --always-copy --no-site-packages  
-   --- Activate virtual environemt using the following command  
-           source venv/bin/activate  
-   --- Install all dependenices using the following command  
-           pip install -r requirements.txt  
-   --- Exit to grader user by typing the following command  
-       -- exit  
-   --- Copy following files and directories recursively in the folder /var/www/fullstack  
-       -- catalog  
-       -- instance  
-       -- migrations  
-       -- tests  
-       -- catalog.wsgi  
-       -- config.py  
-       -- manage.py  
-       -- requirements.txt  
-   --- Move the following folder from /home/grader/p5-linux-config to /var/www/fullstack  
-       -- venv  
-   --- Copy the following file from /home/grader/pf-linus-config to /etc/apache2/sites-available  
-       -- catalog.conf     
-  
-   --- Upgrade to the new catalog database (database should be present in postgres)  
-           python manage.py db upgrade  
-   --- Add sample data using the following commands  
-           python manage.py shell (You will be inside the python shell)  
-           import catalog.sample_data as sample  
-           sample.main() (This will add sample data to the database)  
-   --- Run server with the following command  
-           python manage.py runserver  
-             
+   &nbsp;&nbsp;--- Do a latest chekout from the following repsitory in the home directory /home/grader   
+           &nbsp;&nbsp;&nbsp;&nbsp;https://github.com/kumaratinfy/p5-linux-config.git  
+   &nbsp;&nbsp;--- From shell navigate inside the folder  
+       &nbsp;&nbsp;&nbsp;&nbsp;-- /home/grader/p5-linux-config  
+   &nbsp;&nbsp;--- Swicth to root user using the following command sudo -s  
+   &nbsp;&nbsp;--- create a virtual environment using the command:  
+           &nbsp;&nbsp;&nbsp;&nbsp;virtualenv venv --always-copy --no-site-packages  
+   &nbsp;&nbsp;--- Activate virtual environemt using the following command  
+           &nbsp;&nbsp;&nbsp;&nbsp;source venv/bin/activate  
+   &nbsp;&nbsp;--- Install all dependenices using the following command  
+           &nbsp;&nbsp;&nbsp;&nbsp;pip install -r requirements.txt  
+   &nbsp;&nbsp;--- Exit to grader user by typing the following command  
+       &nbsp;&nbsp;&nbsp;&nbsp;-- exit  
+   &nbsp;&nbsp;--- Copy following files and directories recursively in the folder /var/www/fullstack  
+       &nbsp;&nbsp;&nbsp;&nbsp;-- catalog  
+       &nbsp;&nbsp;&nbsp;&nbsp;-- instance  
+       &nbsp;&nbsp;&nbsp;&nbsp;-- migrations  
+       &nbsp;&nbsp;&nbsp;&nbsp;-- tests  
+       &nbsp;&nbsp;&nbsp;&nbsp;-- catalog.wsgi  
+       &nbsp;&nbsp;&nbsp;&nbsp;-- config.py  
+       &nbsp;&nbsp;&nbsp;&nbsp;-- manage.py  
+       &nbsp;&nbsp;&nbsp;&nbsp;-- requirements.txt  
+   &nbsp;&nbsp;--- Move the following folder from /home/grader/p5-linux-config to /var/www/fullstack  
+       &nbsp;&nbsp;&nbsp;&nbsp;-- venv  
+   &nbsp;&nbsp;--- Copy the following file from /home/grader/pf-linus-config to /etc/apache2/sites-available  
+       &nbsp;&nbsp;&nbsp;&nbsp;-- catalog.conf     
 ---------------------------------------------------------------------------------------------------------------  
 <b>Setting up Postgres:</b>
-  --- Go to psql shell using the following command  
-      -- sudo -u postgres psql  
-      -- Create a new database catalog  
-  --- Create catalog database schema with default data using the following command inside the folder /var/www/fullstack  
-      -- sudo -u postgres python manage.py deploy  
-  --- Create a new database user 'catalog' using the following command inside psql shell    
-      -- sudo -u postgres psql  
-      -- CREATE USER catalog WITH PASSWORD <password>;   
-  --- GRANT privileges in catalog database using the  following command  
-      -- sudo -u postgres psql  
-      -- GRANT SELECT, INSERT, UPDATE, DELETE  ON <tablename> TO catalog;  
-      -- GRANT SELECT, INSERT  ON <indexes> TO catalog;  
-   --- Update connection string in file /var/www/fullstack/instance/application.cfg as follows   
-      -- SQLALCHEMY_DATABASE_URI = 'postgresql://catalog:<password>@localhost:5432/catalog'   
+  &nbsp;&nbsp;--- Go to psql shell using the following command  
+      &nbsp;&nbsp;&nbsp;&nbsp;-- sudo -u postgres psql  
+      &nbsp;&nbsp;&nbsp;&nbsp;-- Create a new database catalog  
+  &nbsp;&nbsp;--- Create catalog database schema with default data using the following command inside the folder /var/www/fullstack  
+      &nbsp;&nbsp;&nbsp;&nbsp;-- sudo -u postgres python manage.py deploy  
+  &nbsp;&nbsp;--- Create a new database user 'catalog' using the following command inside psql shell    
+      &nbsp;&nbsp;&nbsp;&nbsp;-- sudo -u postgres psql  
+      &nbsp;&nbsp;&nbsp;&nbsp;-- CREATE USER catalog WITH PASSWORD <password>;   
+  &nbsp;&nbsp;--- GRANT privileges in catalog database using the  following command  
+      &nbsp;&nbsp;&nbsp;&nbsp;-- sudo -u postgres psql  
+      &nbsp;&nbsp;&nbsp;&nbsp;-- GRANT SELECT, INSERT, UPDATE, DELETE  ON <tablename> TO catalog;  
+      &nbsp;&nbsp;&nbsp;&nbsp;-- GRANT SELECT, INSERT  ON <indexes> TO catalog;  
+   &nbsp;&nbsp;--- Update connection string in file /var/www/fullstack/instance/application.cfg as follows   
+      &nbsp;&nbsp;&nbsp;&nbsp;-- SQLALCHEMY_DATABASE_URI = 'postgresql://catalog:<password>@localhost:5432/catalog'   
       
 ---------------------------------------------------------------------------------------------------------------  
 <b>Running Apache</b>
-  ---  Run the following commands to run web site under apache2  
-      -- sudo a2dissite 000-default  
-      -- sudo a2ensite catalog  
-      -- sudo service apache2 reload  
-      -- sudo service apache2 restart  
+  &nbsp;&nbsp;---  Run the following commands to run web site under apache2  
+      &nbsp;&nbsp;&nbsp;&nbsp;-- sudo a2dissite 000-default  
+      &nbsp;&nbsp;&nbsp;&nbsp;-- sudo a2ensite catalog  
+      &nbsp;&nbsp;&nbsp;&nbsp;-- sudo service apache2 reload  
+      &nbsp;&nbsp;&nbsp;&nbsp;-- sudo service apache2 restart  
 ---------------------------------------------------------------------------------------------------------------  
 <b>Available routes:</b>  
 1) http://\<servername\>:\<port no\>/login  
@@ -122,21 +112,21 @@ SSH Port : 2200
   
 -----------------------------------------------------------------------------------------------------------------    
 <b> Miscellaneous:</b>  
- --- Set up Fail2Ban for disabling a host for 6 consecutive unsuccessful ssh login's.   
-     Following changes were made in the file /etc/failban/jail.local  
-     -- bantime=1800  
-     -- destemail=<My email address>  
-     -- mta=sendmail  
-     -- action = %(action_mwl)s  
-     Enabled following jails for monitoring of apache logs  
-     -- apache-overflows  
-     -- apache-noscript  
-     -- apache-badbots  
-     -- apache-nohome  
-     -- apache  
+ &nbsp;&nbsp;--- Set up Fail2Ban for disabling a host for 6 consecutive unsuccessful ssh login's.   
+     &nbsp;&nbsp;&nbsp;&nbsp;Following changes were made in the file /etc/failban/jail.local  
+     &nbsp;&nbsp;&nbsp;&nbsp;-- bantime=1800  
+     &nbsp;&nbsp;&nbsp;&nbsp;-- destemail=<My email address>  
+     &nbsp;&nbsp;&nbsp;&nbsp;-- mta=sendmail  
+     &nbsp;&nbsp;&nbsp;&nbsp;-- action = %(action_mwl)s  
+     &nbsp;&nbsp;&nbsp;&nbsp;Enabled following jails for monitoring of apache logs  
+     &nbsp;&nbsp;&nbsp;&nbsp;-- apache-overflows  
+     &nbsp;&nbsp;&nbsp;&nbsp;-- apache-noscript  
+     &nbsp;&nbsp;&nbsp;&nbsp;-- apache-badbots  
+     &nbsp;&nbsp;&nbsp;&nbsp;-- apache-nohome  
+     &nbsp;&nbsp;&nbsp;&nbsp;-- apache  
   
- --- Installed glances for monitoring application availability status  
- --- Installed and configured unattended-upgrades for automated security patches installation  
+ &nbsp;&nbsp;--- Installed glances for monitoring application availability status  
+ &nbsp;&nbsp;--- Installed and configured unattended-upgrades for automated security patches installation  
   
 -----------------------------------------------------------------------------------------------------------------    
 
