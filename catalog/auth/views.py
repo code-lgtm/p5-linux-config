@@ -42,6 +42,7 @@ def login():
             login_user(user)
             return redirect(url_for('main.dashboard'))
         else:
+            print 'Username or email invalid : %s' % form.email.data
             flash('Username or password invalid')
 
     if current_user.is_authenticated():
